@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include <string.h>
 class BaseAccount
 {
 public:
@@ -10,9 +9,9 @@ public:
 	std::string uid;
 	Date createDate;
 
-	double balance;///余额
-	double rate;///单次结算利率
-	int settleTime;///结算周期
+	double balance=0;///余额
+	double rate=0;///单次结算利率
+	int settleTime=30;///结算周期
 
 	//AccountRecord historyRecord[];
 
@@ -31,7 +30,7 @@ public:
 
 	///display
 
-	virtual void show() const = 0;
+	//virtual void show() const = 0;
 
 };
 

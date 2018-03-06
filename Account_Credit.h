@@ -9,11 +9,11 @@ public:
 	~Account_Credit();
 
 	//override
-	int settleTime = 30;
-	double rate = 0.005;
+	//int settleTime = 30;
+	//double rate = 0.005;
 
 	//addition
-	double credit = 10000;
+	double credit = 100000;
 
 	///amount setting
 	void deposit(Date, double, std::string);
