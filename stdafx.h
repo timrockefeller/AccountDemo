@@ -13,3 +13,11 @@
 
 
 // TODO: 在此处引用程序需要的其他头文件
+#include <iostream>
+#include <fstream>
+#include <string>
+
+#include "Date.h"
+#include "Accumulator.h"
+#include "BaseAccount.h"
+#include "AccountRecord.h"

@@ -24,12 +24,36 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="BaseAccount.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Date.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Accumulator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountRecord.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="AccountDemo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseAccount.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Date.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Accumulator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountRecord.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
