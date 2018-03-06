@@ -36,6 +36,12 @@
     <ClInclude Include="AccountRecord.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Account_Saving.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Account_Credit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -54,6 +60,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="AccountRecord.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Account_Saving.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Account_Credit.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

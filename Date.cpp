@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Date.h"
 
-
+int monthSet[] = { 31, 28, 31, 30, 31,30,31,31,30,31,30,31 };
 Date::Date(){}
 
 Date::Date(int _year, int _month, int _day)
@@ -32,7 +32,7 @@ int Date::getDistance(Date baseDate) {
 					}
 				}
 				//month day
-				int monthSet[] = { 31, 28, 31, 30, 31,30,31,31,30,31,30,31 };
+				
 				if (checkLeap(baseDate.year))  monthSet[1] = 29; else monthSet[1] = 28;
 				for (int m = 0; m < baseDate.month - 1; m++) {
 					distance -= monthSet[m];
@@ -53,9 +53,32 @@ int Date::getDistance(Date baseDate) {
 	return -1;
 }
 
+void Date::addDay(int u)
+{
+	while (u > 0) {
+		this->day++;
+		if (this->day > monthSet[this->month - 1]) {
+			this->day = 1;
+			this->month += 1;
+			if (this->month > 11) {
+				this->year++;
+				if (checkLeap(this->year)) monthSet[1] = 29; else monthSet[1] = 28;
+				this->month = 1;
+			}
+		}
+		--u;
+	}
+}
+
 bool Date::checkLeap(int year)
 {
 	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
 		return true;
 	return false;
 }
+
+std::string Date::show()
+{
+	return  year + "-" + month + '-' + day;
+}
+

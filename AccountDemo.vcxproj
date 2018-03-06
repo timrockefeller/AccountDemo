@@ -147,6 +147,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccountRecord.h" />
+    <ClInclude Include="Account_Credit.h" />
+    <ClInclude Include="Account_Saving.h" />
     <ClInclude Include="Accumulator.h" />
     <ClInclude Include="BaseAccount.h" />
     <ClInclude Include="Date.h" />
@@ -156,6 +158,8 @@
   <ItemGroup>
     <ClCompile Include="AccountDemo.cpp" />
     <ClCompile Include="AccountRecord.cpp" />
+    <ClCompile Include="Account_Credit.cpp" />
+    <ClCompile Include="Account_Saving.cpp" />
     <ClCompile Include="Accumulator.cpp" />
     <ClCompile Include="BaseAccount.cpp" />
     <ClCompile Include="Date.cpp" />

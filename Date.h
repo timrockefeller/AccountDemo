@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 class Date
 {
 public:
@@ -10,6 +11,9 @@ public:
 	int month;
 	int day;
 	int getDistance(Date baseDate);
+	void addDay(int);
 	bool checkLeap(int year);
+
+	std::string show();
 };
 

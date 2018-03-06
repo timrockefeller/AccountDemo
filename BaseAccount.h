@@ -7,16 +7,18 @@ public:
 	BaseAccount();
 	~BaseAccount();
 	int id;///账户id
+	std::string uid;
 	Date createDate;
 
 	double balance;///余额
-	double rate;///年利率
+	double rate;///单次结算利率
+	int settleTime;///结算周期
 
 	//AccountRecord historyRecord[];
 
 	Accumulator acc;///累计利润/债务
 	///impletment function
-	int getId();
+	std::string getUid();
 	double getBalance();
 	double getRate();
 
@@ -25,10 +27,11 @@ public:
 
 	void record(Date, double, std::string);
 
-	void settle(Date date);
+	void settle(Date);
 
 	///display
-	//virtual void show();
+
+	virtual void show() const = 0;
 
 };
 

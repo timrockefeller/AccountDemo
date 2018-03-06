@@ -7,8 +7,10 @@ public:
 	Accumulator(Date);
 	~Accumulator();
 	
+	Date lastSettle;
 	Date lastUpdate;
 	double value;
-
+	double sum;
+	int timePassed;
 };
 

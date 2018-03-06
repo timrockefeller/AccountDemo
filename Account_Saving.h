@@ -5,8 +5,13 @@ class Account_Saving :
 {
 public:
 	Account_Saving();
+	Account_Saving(Date,std::string);
 	~Account_Saving();
 
+	//override
+	int settleTime = 350;
+	double rate = 0.015;
+	
 	///amount setting
 
 	void deposit(Date, double,std::string);
