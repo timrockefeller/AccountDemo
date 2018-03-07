@@ -2,7 +2,7 @@
 
 
 
-BaseAccount::BaseAccount(){}
+//BaseAccount::BaseAccount(){}
 BaseAccount::~BaseAccount(){}
 
 std::string BaseAccount::getUid(){return this->uid;}
@@ -13,6 +13,7 @@ double BaseAccount::getRate(){return this->rate;}
 
 void BaseAccount::record(Date _date, double _amount, std::string _desc)
 {
+	_amount = (int)(_amount * 100 + 0.5) / 100.0;
 	int passedTime = _date.getDistance(this->acc.lastUpdate);
 	if (passedTime == 0) {
 		this->acc.sum += _amount;
@@ -39,4 +40,5 @@ void BaseAccount::settle(Date date)
 		this->acc.lastUpdate = this->acc.lastSettle;
 		this->acc.sum = 0;
 	}
+	this->acc.value = (int)(this->acc.value * 100 + 0.5) *1.0 / 100.0;
 }

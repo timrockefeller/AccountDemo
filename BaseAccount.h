@@ -3,7 +3,7 @@
 class BaseAccount
 {
 public:
-	BaseAccount();
+	//BaseAccount();
 	~BaseAccount();
 	int id;///’Àªßid
 	std::string uid;
@@ -23,6 +23,9 @@ public:
 
 
 	///amount settlement
+	virtual void deposit(Date, double, std::string)=0;
+
+	virtual void withdraw(Date, double, std::string)=0;
 
 	void record(Date, double, std::string);
 
@@ -30,7 +33,7 @@ public:
 
 	///display
 
-	//virtual void show() const = 0;
+	virtual const void show() = 0;
 
 };
 

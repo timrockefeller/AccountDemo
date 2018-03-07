@@ -17,6 +17,7 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include <vector>
 
 #include "Date.h"
 #include "Accumulator.h"
@@ -24,3 +25,5 @@
 #include "AccountRecord.h"
 #include "Account_Saving.h"
 #include "Account_Credit.h"
+#include "FileIO.h"
+#include "Manager.h"

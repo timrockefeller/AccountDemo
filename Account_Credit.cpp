@@ -16,7 +16,7 @@ Account_Credit::~Account_Credit()
 {
 }
 
-void Account_Credit::deposit(Date _date, double _amount, std::string _disc)
+void Account_Credit::deposit(Date _date, double _amount, std::string _disc="")
 {
 	if (-_amount + this->balance + this->acc.value > 0) {
 		if (_amount > this->acc.value) {
@@ -34,10 +34,11 @@ void Account_Credit::deposit(Date _date, double _amount, std::string _disc)
 	}
 }
 
-void Account_Credit::withdraw(Date _date, double _amount, std::string _disc)
+void Account_Credit::withdraw(Date _date, double _amount, std::string _disc="")
 {
 	if (_amount + this->balance + this->acc.value <= credit) {
 		this->record(_date, _amount, _disc);
+		std::cout << "You withdrawed " << _amount << " for " << _disc << std::endl;
 	}
 	else {
 		//Error : overwithdraw

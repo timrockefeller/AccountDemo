@@ -8,6 +8,12 @@ public:
 	Account_Credit(Date, std::string);
 	~Account_Credit();
 
+	void deposit(Date, double, std::string);
+
+	void withdraw(Date, double, std::string);
+
+	const void show();
+
 	//override
 	//int settleTime = 30;
 	//double rate = 0.005;
@@ -16,11 +22,9 @@ public:
 	double credit = 100000;
 
 	///amount setting
-	void deposit(Date, double, std::string);
+	//void deposit(Date, double, std::string);
 
-	void withdraw(Date, double, std::string);
-
-	const void show();
+	//void withdraw(Date, double, std::string);
 
 };
 
