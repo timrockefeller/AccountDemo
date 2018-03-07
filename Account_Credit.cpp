@@ -9,6 +9,7 @@ Account_Credit::Account_Credit(Date _createDate,std::string _uid)
 	this->balance = 0;
 	this->settleTime = 30;
 	this->rate = 0.005;
+	this->accountType = CreditAccount;
 }
 
 

@@ -9,6 +9,7 @@ Account_Saving::Account_Saving(Date _createDate,std::string _uid)
 	this->balance = 0;
 	this->settleTime = 300;
 	this->rate = 0.045;
+	this->accountType = SavingAccount;
 }
 
 

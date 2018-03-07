@@ -9,3 +9,7 @@ FileIO::FileIO()
 FileIO::~FileIO()
 {
 }
+
+void FileIO::loadHistory()
+{
+}

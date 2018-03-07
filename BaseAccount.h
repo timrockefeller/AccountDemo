@@ -1,5 +1,12 @@
 #pragma once
 #include "stdafx.h"
+
+enum AccountType {
+	CreditAccount,
+	SavingAccount
+};
+
+
 class BaseAccount
 {
 public:
@@ -8,6 +15,8 @@ public:
 	int id;///账户id
 	std::string uid;
 	Date createDate;
+
+	AccountType accountType;
 
 	double balance=0;///余额
 	double rate=0;///单次结算利率
