@@ -15,5 +15,7 @@ public:
 	bool checkLeap(int year);
 
 	std::string show();
+private:
+	int getMaxday(int);
 };
 
