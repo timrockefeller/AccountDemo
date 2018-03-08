@@ -71,22 +71,22 @@ int Manager::newAccount(AccountType type, Date createDate, std::string uid)
 {
 
 	///Name use Check
-	/*for (BaseAccount  ba : userList) {
+	for (BaseAccount*  ba : userList) {
 		if (uid == ba->uid) {
 			std::cout << "Error : Username have been used!\n";
 			return -1;
 		}
-	}*/
+	}
 	std::cout << "Account Created: " << uid<<std::endl;
 	switch (type)
 	{
 	case CreditAccount:
-		userList.push_back(Account_Credit(createDate, uid));
-		userList[n_User].id = n_User;
+		userList.push_back(new Account_Credit(createDate, uid));
+		userList[n_User]->id = n_User;
 		break;
 	case SavingAccount:
-		userList.push_back(Account_Saving(createDate, uid));
-		userList[n_User].id = n_User;
+		userList.push_back(new Account_Saving(createDate, uid));
+		userList[n_User]->id = n_User;
 		break;
 	default:
 		break;
@@ -100,7 +100,10 @@ void Manager::command(std::string _)
 	try {
 		std::vector<std::string> _COM = splitString(_);
 		if (_ == "" || _COM[0] == "")return;
-		if (_COM[0] == "add") {//add Account
+		BaseAccount*pba=NULL;
+		Account_Credit*pca = NULL;
+		Account_Saving*psa = NULL;
+		if (_COM[0] == "add" || _COM[0] == "a") {//add Account
 			if (_COM[1] == "c") {
 				this->newAccount(CreditAccount, this->now, _COM[2]);
 				return;
@@ -109,10 +112,44 @@ void Manager::command(std::string _)
 				this->newAccount(SavingAccount, this->now, _COM[2]);
 				return;
 			}
-			throw("unknow Account type.\n\"s\" for Saving Account.\n\"c\" for Credit Account\n");
+			throw("unknow Account type.\n    \"s\" for Saving Account.\n    \"c\" for Credit Account\n");
+		}
+		else if (_COM[0] == "deposit" || _COM[0] == "d") {
+			pba = this->getAccountById(std::atoi(_COM[1].c_str()));
+			if (pba->id>=0) {
+				pba->deposit(this->now, std::atof(_COM[2].c_str()), "");
+				return;
+			}
+			throw("your id entered does not exist.");
+		}
+		else if (_COM[0] == "withdraw" || _COM[0] == "w") {
+			pba = this->getAccountById(std::atoi(_COM[1].c_str()));
+			if (pba->id >= 0) {
+				pba->withdraw(this->now, std::atof(_COM[2].c_str()), "");
+				return;
+			}
+			throw("your id entered does not exist.");
+		}
+		else if (_COM[0] == "show" || _COM[0] == "s") {
+			pba = this->getAccountById(std::atoi(_COM[1].c_str()));
+			if (pba->id >= 0) {
+				pba->show();
+				return;
+			}
+			throw("your id entered does not exist.");
+		}
+		else if (_COM[0] == "ls") {
+			std::cout << "All Account Listed (" << userList.size() << ")\n";
+			std::cout << "ID\tUsername\tAccountType\n";
+			std::vector<BaseAccount*>::const_iterator ba;
+			for (ba = this->userList.begin(); ba != this->userList.end();++ba) {
+				if((*ba)->id>=0)
+					std::cout << (*ba)->id << "\t" << (*ba)->uid << "\t" << ((*ba)->accountType == SavingAccount ? "SavingAccount" : "CreditAccount") << std::endl;
+			}
+			return;
 		}
 		else if (_COM[0] == "help" || _COM[0] == "?") {
-			std::cout << "Help Page\n" << this->helpmessage<<std::endl;
+			std::cout << "    Help Page\n" << this->helpmessage<<std::endl;
 			return;
 		}
 		else if (_COM[0] == "exit") {
@@ -136,6 +173,18 @@ void Manager::command(std::string _)
 		std::cout << i << std::endl;
 	}
 }
+
+BaseAccount* Manager::getAccountById(int _)
+{
+	std::vector<BaseAccount*>::const_iterator ba;
+	for (ba = this->userList.begin(); ba != this->userList.end();++ba) {
+		if (_ == (*ba)->id) {
+			return  (*ba);
+		}
+	}
+	return new Account_Null();
+}
+
 
 void Manager::Run()
 {

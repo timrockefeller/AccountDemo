@@ -3,7 +3,9 @@
 
 
 //BaseAccount::BaseAccount(){}
-BaseAccount::~BaseAccount(){}
+BaseAccount::~BaseAccount(){
+	this->id = -1;
+}
 
 std::string BaseAccount::getUid(){return this->uid;}
 double BaseAccount::getBalance(){return this->balance;}

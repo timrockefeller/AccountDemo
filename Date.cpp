@@ -102,8 +102,7 @@ int Date::getMaxday(int year,int month)
 		}
 		
 	}
-	else {
 		return 0;
-	}
+	
 }
 

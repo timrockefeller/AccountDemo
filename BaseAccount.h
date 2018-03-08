@@ -42,7 +42,14 @@ public:
 
 	///display
 
-	virtual const void show() {}
+	virtual const void show() = 0;
 
 };
 
+class Account_Null:public BaseAccount {
+public:
+	Account_Null() {
+		this->id = -1;
+	}
+	void const show() {}
+};

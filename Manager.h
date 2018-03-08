@@ -18,7 +18,7 @@ public:
 	
 	///User Manager
 	int n_User = 0;
-	std::vector<BaseAccount> userList;
+	std::vector<BaseAccount*> userList;
 	
 	int newAccount(AccountType, Date, std::string);
 	
@@ -34,7 +34,13 @@ private:
 	void Run();
 	void command(std::string);
 	std::string helpmessage = //vetory
-"add [s|c] [username]\tAdd Account with username, return Card ID(important)\n\
-exit\tExit\n\
+"\
+add(a) [s|c] [username] : Add Account with username, return Card ID(important)\n\
+deposit(d) [ID] [amount]\n\
+withdraw(w) [ID] [amount]\n\
+show(s) [ID] : show information of the account\n\
+ls : list all Account\n\
+exit : Save and exit\n\
 ";
+	BaseAccount* getAccountById(int);
 };
