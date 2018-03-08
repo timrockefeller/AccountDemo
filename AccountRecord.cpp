@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-
+AccountRecord::AccountRecord() {};
 AccountRecord::AccountRecord(Date _date, double _amount, std::string _desc)
 {
 	this->date = _date;

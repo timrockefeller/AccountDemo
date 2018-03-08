@@ -1,11 +1,10 @@
 #include "stdafx.h"
-std::vector<std::string> splitString(const std::string& s, const std::string& seperator =" ") {
+
+std::vector<std::string> splitString(const std::string& s, const std::string& seperator = " ") {
 	std::vector<std::string> result;
 	typedef std::string::size_type string_size;
 	string_size i = 0;
-
 	while (i != s.size()) {
-		
 		int flag = 0;
 		while (i != s.size() && flag == 0) {
 			flag = 1;
@@ -16,8 +15,6 @@ std::vector<std::string> splitString(const std::string& s, const std::string& se
 					break;
 				}
 		}
-
-		//找到又一个分隔符，将两个分隔符之间的字符串取出；
 		flag = 0;
 		string_size j = i;
 		while (j != s.size() && flag == 0) {
@@ -45,7 +42,7 @@ Manager::Manager()
 	std::string dateS;
 	std::cin >> dateS;
 	this->setTime(dateS);
-	this->fio.loadHistory();
+	this->loadHistory();
 	this->Run();
 }
 Manager::Manager(Date _date)
@@ -53,12 +50,40 @@ Manager::Manager(Date _date)
 	std::cout << "Loading system...\n";
 	std::cout << "Today is " << _date.year << "-" << _date.month << "-" << _date.day << ".\n";
 	this->now = _date;
-	this->fio.loadHistory();
+	this->loadHistory();
 	this->Run();
 }
 
 Manager::~Manager()
 {
+}
+
+void Manager::loadHistory()
+{
+	std::ifstream i;
+	std::string b;
+	i.open(this->DATA_PATH);
+	if (i.is_open()) {
+		while (i.good() && !i.eof()) {
+			std::getline(i, b);
+			std::vector<std::string> a = splitString(b, " ");
+			if (splitString(a[0], "-").size() == 3) {
+				this->setTime(a[0]);
+				std::string _="";
+				for (int m = 1; m < a.size(); ++m) {
+					_ += " " + a[m];
+				}
+				this->command(_);
+			}
+		}
+	}
+}
+
+void Manager::log(std::string _)
+{
+	std::string b = this->now.show() + " " + _ + "\n";
+	std::ofstream o(this->DATA_PATH,std::ios::app);
+	o << b;
 }
 
 void Manager::setTime(std::string _Date)
@@ -95,22 +120,22 @@ int Manager::newAccount(AccountType type, Date createDate, std::string uid)
 	return n_User++;
 }
 
-void Manager::command(std::string _)
+bool Manager::command(std::string _)
 {
 	try {
 		std::vector<std::string> _COM = splitString(_);
-		if (_ == "" || _COM[0] == "")return;
+		if (_ == "" || _COM[0] == "")return false;
 		BaseAccount*pba=NULL;
 		Account_Credit*pca = NULL;
 		Account_Saving*psa = NULL;
 		if (_COM[0] == "add" || _COM[0] == "a") {//add Account
 			if (_COM[1] == "c") {
 				this->newAccount(CreditAccount, this->now, _COM[2]);
-				return;
+				return true;
 			}
 			else if (_COM[1] == "s") {
 				this->newAccount(SavingAccount, this->now, _COM[2]);
-				return;
+				return true;
 			}
 			throw("unknow Account type.\n    \"s\" for Saving Account.\n    \"c\" for Credit Account\n");
 		}
@@ -118,7 +143,7 @@ void Manager::command(std::string _)
 			pba = this->getAccountById(std::atoi(_COM[1].c_str()));
 			if (pba->id>=0) {
 				pba->deposit(this->now, std::atof(_COM[2].c_str()), "");
-				return;
+				return true;
 			}
 			throw("your id entered does not exist.");
 		}
@@ -126,7 +151,7 @@ void Manager::command(std::string _)
 			pba = this->getAccountById(std::atoi(_COM[1].c_str()));
 			if (pba->id >= 0) {
 				pba->withdraw(this->now, std::atof(_COM[2].c_str()), "");
-				return;
+				return true;
 			}
 			throw("your id entered does not exist.");
 		}
@@ -134,7 +159,7 @@ void Manager::command(std::string _)
 			pba = this->getAccountById(std::atoi(_COM[1].c_str()));
 			if (pba->id >= 0) {
 				pba->show();
-				return;
+				return false;
 			}
 			throw("your id entered does not exist.");
 		}
@@ -146,17 +171,17 @@ void Manager::command(std::string _)
 				if((*ba)->id>=0)
 					std::cout << (*ba)->id << "\t" << (*ba)->uid << "\t" << ((*ba)->accountType == SavingAccount ? "SavingAccount" : "CreditAccount") << std::endl;
 			}
-			return;
+			return false;
 		}
 		else if (_COM[0] == "help" || _COM[0] == "?") {
 			std::cout << "    Help Page\n" << this->helpmessage<<std::endl;
-			return;
+			return false;
 		}
 		else if (_COM[0] == "exit") {
 			this->runflag = false;
 			std::cout << "Saved. Press any key to exit...";
 			std::getchar();
-			return;
+			return false;
 		}
 		throw("unknow Command " + _COM[0]);
 	}
@@ -172,6 +197,7 @@ void Manager::command(std::string _)
 	{
 		std::cout << i << std::endl;
 	}
+	return false;
 }
 
 BaseAccount* Manager::getAccountById(int _)
@@ -194,6 +220,8 @@ void Manager::Run()
 		std::string _;
 		std::cout << ">> ";
 		std::getline(std::cin, _);
-		this->command(_);
+		if (this->command(_)) {
+			this->log(_);
+		}
 	}
 }

@@ -26,13 +26,16 @@ public:
 	
 
 	///File Manager
-	FileIO fio;
+	const std::string DATA_PATH = "userdata.txt";
+	void loadHistory();
+	void log(std::string);
+
 private:
 	Date baseTime = Date(2010, 1, 1);
 	void setTime(std::string);
 	//void init();
 	void Run();
-	void command(std::string);
+	bool command(std::string);
 	std::string helpmessage = //vetory
 "\
 add(a) [s|c] [username] : Add Account with username, return Card ID(important)\n\

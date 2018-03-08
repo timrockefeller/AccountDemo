@@ -1,5 +1,6 @@
 #include "stdafx.h"
-#include "Date.h"
+
+
 
 Date::Date(){}
 
@@ -86,7 +87,8 @@ bool Date::checkLeap(int year)
 
 std::string Date::show()
 {
-	return  year + "-" + month + '-' + day;
+	std::string sep="-",_ = std::to_string(this->year) + sep + std::to_string(this->month) + sep + std::to_string(this->day);
+	return _;
 }
 
 int Date::getMaxday(int year,int month)

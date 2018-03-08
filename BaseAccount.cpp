@@ -15,7 +15,9 @@ double BaseAccount::getRate(){return this->rate;}
 
 void BaseAccount::record(Date _date, double _amount, std::string _desc)
 {
+
 	_amount = (int)(_amount * 100 + 0.5) / 100.0;
+	//this->history.push_back(new AccountRecord(_date, _amount, _desc));
 	int passedTime = _date.getDistance(this->acc.lastUpdate);
 	if (passedTime == 0) {
 		this->acc.sum += _amount;

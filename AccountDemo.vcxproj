@@ -152,7 +152,6 @@
     <ClInclude Include="Accumulator.h" />
     <ClInclude Include="BaseAccount.h" />
     <ClInclude Include="Date.h" />
-    <ClInclude Include="FileIO.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -165,7 +164,6 @@
     <ClCompile Include="Accumulator.cpp" />
     <ClCompile Include="BaseAccount.cpp" />
     <ClCompile Include="Date.cpp" />
-    <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

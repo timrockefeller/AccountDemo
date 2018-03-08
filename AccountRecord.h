@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include<string>
 class AccountRecord
 {
 public:
@@ -8,6 +7,8 @@ public:
 	double amount;
 	std::string describtion;
 	
+	AccountRecord();
+
 	AccountRecord(Date, double, std::string);
 	~AccountRecord();
 };

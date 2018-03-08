@@ -18,11 +18,11 @@ public:
 
 	AccountType accountType;
 
-	double balance=0;///余额
-	double rate=0;///单次结算利率
-	int settleTime=30;///结算周期
+	double balance = 0;///余额
+	double rate = 0;///单次结算利率
+	int settleTime = 30;///结算周期
 
-	//AccountRecord historyRecord[];
+	//std::vector<AccountRecord*> history;
 
 	Accumulator acc;///累计利润/债务
 	///impletment function
