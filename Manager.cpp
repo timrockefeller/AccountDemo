@@ -36,13 +36,13 @@ std::vector<std::string> splitString(const std::string& s, const std::string& se
 	return result;
 }
 
-Manager::Manager()
+Manager::Manager()//for Debug
 {
 	std::cout << "Loading system...\nPlease Insert Date of NOW (yyyy-mm-dd):\n";
 	std::string dateS;
 	std::cin >> dateS;
-	this->setTime(dateS);
 	this->loadHistory();
+	this->setTime(dateS);
 	this->Run();
 }
 Manager::Manager(Date _date)
@@ -69,7 +69,7 @@ void Manager::loadHistory()
 			std::vector<std::string> a = splitString(b, " ");
 			if (splitString(a[0], "-").size() == 3) {
 				this->setTime(a[0]);
-				std::string _="";
+				std::string _ = "";
 				for (int m = 1; m < a.size(); ++m) {
 					_ += " " + a[m];
 				}
@@ -128,7 +128,7 @@ bool Manager::command(std::string _)
 		BaseAccount*pba=NULL;
 		Account_Credit*pca = NULL;
 		Account_Saving*psa = NULL;
-		if (_COM[0] == "add" || _COM[0] == "a") {//add Account
+		if ((_COM[0] == "add" || _COM[0] == "a")&&_COM.size() ==3) {//add Account
 			if (_COM[1] == "c") {
 				this->newAccount(CreditAccount, this->now, _COM[2]);
 				return true;
@@ -139,7 +139,7 @@ bool Manager::command(std::string _)
 			}
 			throw("unknow Account type.\n    \"s\" for Saving Account.\n    \"c\" for Credit Account\n");
 		}
-		else if (_COM[0] == "deposit" || _COM[0] == "d") {
+		else if ((_COM[0] == "deposit" || _COM[0] == "d") && _COM.size() >= 3) {
 			pba = this->getAccountById(std::atoi(_COM[1].c_str()));
 			if (pba->id>=0) {
 				pba->deposit(this->now, std::atof(_COM[2].c_str()), "");
@@ -147,7 +147,7 @@ bool Manager::command(std::string _)
 			}
 			throw("your id entered does not exist.");
 		}
-		else if (_COM[0] == "withdraw" || _COM[0] == "w") {
+		else if ((_COM[0] == "withdraw" || _COM[0] == "w") && _COM.size() >= 3) {
 			pba = this->getAccountById(std::atoi(_COM[1].c_str()));
 			if (pba->id >= 0) {
 				pba->withdraw(this->now, std::atof(_COM[2].c_str()), "");
@@ -155,7 +155,7 @@ bool Manager::command(std::string _)
 			}
 			throw("your id entered does not exist.");
 		}
-		else if (_COM[0] == "show" || _COM[0] == "s") {
+		else if ((_COM[0] == "show" || _COM[0] == "s") && _COM.size() == 2) {
 			pba = this->getAccountById(std::atoi(_COM[1].c_str()));
 			if (pba->id >= 0) {
 				pba->show();
@@ -174,11 +174,13 @@ bool Manager::command(std::string _)
 			return false;
 		}
 		else if (_COM[0] == "help" || _COM[0] == "?") {
+			if (!this->_COUT_MUTE)
 			std::cout << "    Help Page\n" << this->helpmessage<<std::endl;
 			return false;
 		}
 		else if (_COM[0] == "exit") {
-			this->runflag = false;
+			this->_RUN_FLAG = false;
+			if (!this->_COUT_MUTE)
 			std::cout << "Saved. Press any key to exit...";
 			std::getchar();
 			return false;
@@ -187,15 +189,22 @@ bool Manager::command(std::string _)
 	}
 	catch (char *str)
 	{
+		if(!this->_COUT_MUTE)
 		std::cout << "Error : "<< str << std::endl;
 	}
 	catch (std::string str) 
 	{
+		if (!this->_COUT_MUTE)
 		std::cout << "Error : " << str << std::endl;
 	}
 	catch (int i)
 	{
+		if (!this->_COUT_MUTE)
 		std::cout << i << std::endl;
+	}
+	catch (const std::out_of_range& oor) {
+		if (!this->_COUT_MUTE)
+		std::cerr << "Expression illegal: " << oor.what() << '\n';
 	}
 	return false;
 }
@@ -214,9 +223,10 @@ BaseAccount* Manager::getAccountById(int _)
 
 void Manager::Run()
 {
-	this->runflag = true;
-	std::cout << "Input \"help\" or \"?\" to get further information..\n";
-	while (runflag) {
+	this->_RUN_FLAG = true;
+	std::system("cls");
+	std::cout << "Welcome to bank system\n"<<"Today is " << this->now.show() <<"\nInput \"help\" or \"?\" to get further information..\n";
+	while (_RUN_FLAG) {
 		std::string _;
 		std::cout << ">> ";
 		std::getline(std::cin, _);

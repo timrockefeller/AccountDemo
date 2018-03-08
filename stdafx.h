@@ -11,10 +11,12 @@
 
 
 #include <iostream>
+#include <stdlib.h>
 #include <fstream>
 #include <string>
 #include <stdexcept>
 #include <vector>
+#include <time.h>
 
 #include "Date.h"
 #include "AccountRecord.h"

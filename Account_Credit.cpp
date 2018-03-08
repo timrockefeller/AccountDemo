@@ -39,7 +39,7 @@ void Account_Credit::withdraw(Date _date, double _amount, std::string _disc="")
 {
 	if (_amount + this->balance + this->acc.value <= credit) {
 		this->record(_date, _amount, _disc);
-		std::cout << "You withdrawed " << _amount << " for " << _disc << std::endl;
+		std::cout << "You withdrawed " << _amount << std::endl;
 	}
 	else {
 		//Error : overwithdraw

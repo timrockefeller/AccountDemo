@@ -10,7 +10,7 @@ public:
 	Manager(Date);
 	~Manager();
 
-	bool runflag = false;
+	
 	///Time Manager
 	//中央银行基准时间
 	
@@ -31,6 +31,9 @@ public:
 	void log(std::string);
 
 private:
+	bool _RUN_FLAG = false;
+	bool _COUT_MUTE = false;
+
 	Date baseTime = Date(2010, 1, 1);
 	void setTime(std::string);
 	//void init();
