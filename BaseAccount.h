@@ -32,9 +32,9 @@ public:
 
 
 	///amount settlement
-	virtual void deposit(Date, double, std::string)=0;
+	virtual void deposit(Date, double, std::string) {}
 
-	virtual void withdraw(Date, double, std::string)=0;
+	virtual void withdraw(Date, double, std::string) {}
 
 	void record(Date, double, std::string);
 
@@ -42,7 +42,7 @@ public:
 
 	///display
 
-	virtual const void show() = 0;
+	virtual const void show() {}
 
 };
 

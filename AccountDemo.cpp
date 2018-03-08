@@ -7,8 +7,10 @@
 int main()
 {
 	///insert **NOW** every initialization
-	Manager manager();
+	Manager manager = Manager(Date(2018,3,7));
+	
 
+	//manager.command("add c TimRockefeller");
     return 0;
 }
 

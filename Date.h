@@ -12,10 +12,11 @@ public:
 	int day;
 	int getDistance(Date baseDate);
 	void addDay(int);
-	bool checkLeap(int year);
+	
 
 	std::string show();
 private:
-	int getMaxday(int);
+	bool checkLeap(int year);
+	int getMaxday(int,int);
 };
 
