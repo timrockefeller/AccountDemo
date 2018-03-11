@@ -126,8 +126,6 @@ bool Manager::command(std::string _)
 		std::vector<std::string> _COM = splitString(_);
 		if (_ == "" || _COM[0] == "")return false;
 		BaseAccount*pba=NULL;
-		Account_Credit*pca = NULL;
-		Account_Saving*psa = NULL;
 		if ((_COM[0] == "add" || _COM[0] == "a")&&_COM.size() ==3) {//add Account
 			if (_COM[1] == "c") {
 				this->newAccount(CreditAccount, this->now, _COM[2]);
